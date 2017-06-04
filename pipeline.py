@@ -73,7 +73,7 @@ for row in rows:
     print(name, count)
 
 
-# Now read the results
+# Now read the results１
 pipeline.execute('SELECT * FROM namecout２_view')
 rows = pipeline.fetchall()
 print("\t\n")
