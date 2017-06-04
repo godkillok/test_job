@@ -83,7 +83,7 @@ for row in rows:
     print(name, count)
 
 
-# Now read the results
+# Now read the results１２
 pipeline.execute('SELECT * FROM namemin2')
 rows = pipeline.fetchall()
 print("\t\n")
