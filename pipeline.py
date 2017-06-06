@@ -13,6 +13,7 @@ CREATE STREAM namestream (name text, namecount bigint);
 # conn.commit()
 
 
+
 #建立正常的CONTINUOUS VIEW
 create_cv = """
 CREATE CONTINUOUS VIEW namecout２_view AS SELECT name,COUNT(*) FROM namestream GROUP BY name
@@ -20,6 +21,13 @@ CREATE CONTINUOUS VIEW namecout２_view AS SELECT name,COUNT(*) FROM namestream 
 # pipeline.execute(create_cv)
 # conn.commit()
 
+
+#建立Stream-table JOINs正常的CONTINUOUS VIEW
+create_cv = """
+CREATE CONTINUOUS VIEW streamjoin AS SELECT namestream.name,COUNT(*) FROM namestream join user_tbl ON namestream.name = user_tbl.name GROUP BY namestream.name
+"""
+# pipeline.execute(create_cv)
+# conn.commit()
 
 #1分钟的时间窗口CONTINUOUS VIEW
 create_cv = """
@@ -52,8 +60,12 @@ for i in range(10):
 # pipeline.execute("INSERT INTO namestream VALUES('apple3',5642)")
 # pipeline.execute("INSERT INTO namestream VALUES('apple2',5642)")
 # # Now write the rows to the stream
-# pipeline.executemany('INSERT INTO namestream VALUES (%(name)s,%(namecount)s)', rows)
-pipeline.execute('INSERT INTO namestream (name) SELECT name FROM user_tbl')
+pipeline.executemany('INSERT INTO namestream VALUES (%(name)s,%(namecount)s)', rows)
+
+#插入一个table
+# pipeline.execute('INSERT INTO namestream (name) SELECT name FROM user_tbl')
+
+
 # Now read the results
 pipeline.execute('SELECT * FROM namecout_view')
 rows = pipeline.fetchall()
@@ -92,6 +104,14 @@ for row in rows:
     name, minute,count = row
     print(name, minute,count)
 
+# Now read the results１２
+pipeline.execute('SELECT * FROM streamjoin')
+rows = pipeline.fetchall()
+print("\t\n")
+print("＝＝streamjoin‘")
+for row in rows:
+    name,count = row
+    print(name, minute,count)
 # pipeline.execute('DROP CONTINUOUS VIEW continuous_view')
 pipeline.close()
 

@@ -19,7 +19,7 @@ result=[]
 for i in range(5):
      print(i, end=',')
 
-for i in range(5):
+for i in range(2):
      data = {}
      print('name'+str(i), end=',')
      data['name']='name'+str(i)
