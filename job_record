@@ -1,0 +1,44 @@
+cd /home/tom/pycharm/bin
+bash pycharm.sh
+ｐｉｐｅｌｉｎｅ居然还大小写敏感
+pipeline-ctl -D OPT/pipelinedb/Data -l pipelinedb.log start
+pipeline-ctl -D <data directory> stop
+
+pipeline-ctl start -D /opt/pipiline/data1 -l /opt/pipiline/data1/pipelinedb.log
+---开始
+pipeline-ctl start -D /opt/pipiline/data1 -l /opt/pipiline/data1/pipelinedb.log
+---停止
+pipeline-ctl -D /opt/pipiline/data1 stop
+pipeline　pipeline
+
+---
+apt-get upgrade
+
+－－－－
+ drop continuous view continuous_view
+ DROP TABLE public.continuous_view_mrel;
+----github
+ssh-keygen -t rsa -C "fujianhaowawa@163.com"
+git config --global user.name "godkillok"　
+git config --global user.email "fujianhaowawa@163.com"
+
+
+－－从github　获得安装包
+git clone https://github.com/ibbd-dev/TextGrocery.git
+cd TextGrocery
+make
+python python /home/tom/TextGrocery/setup.py install
+
+－－－－－
+方法一:函数添加
+import sys
+sys.path.append("/usr/local/lib/python3.4/dist-packages/")
+
+方法一:函数添加
+学习python不久，碰到个问题，怎么样把自己写的模块加入到python默认就有的搜索路径中呢？不要每次非得import sys; sys.path.append(‘/home/fightlikekobe/python’)才可。
+
+上网找了很多久未果，都来我自己糊里糊涂找到了解决方法，那就是在dist-packages（即/usr/local/lib/python2.7/dist-packages）添加一个路径文件，如mypkpath.pth，必须以.pth为后缀，写上你要加入的文件名称就是了，如我的：
+
+/home/fightlikekobe/python
+
+保存退出，OK！结果自己验证，重启terminal，再次打开python，
