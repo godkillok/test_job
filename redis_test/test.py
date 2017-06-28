@@ -25,7 +25,7 @@ def run():
         print(k,v)
 
     print (r.hgetall('user:012'))
-    # print(r.get('rlist'))
+    # print(r.get('rlis22t'))
 
 
 
