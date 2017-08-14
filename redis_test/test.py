@@ -3,7 +3,7 @@ import redis
 
 def run():
     t = redis
-    r =t.Redis(host='localhost', port=6379)
+    r =t.Redis(host='localhost', port=6379).pipeline()
     print(r.set('bing', 'baz'))
     print(r.sadd('b2ing', 'baz'))
     r.rpush('rlist',1,2,3)
@@ -20,11 +20,16 @@ def run():
         'time': 'now',
         'votes': 1,
     })
-    dic=r.hgetall('user:013')
-    for (k,v) in dic.items():
-        print(k,v)
+    r.hgetall('user:013')
+    r.hgetall('usef')
+    r.get('usfhef')
+    d=r.execute(raise_on_error=True)
+    print(d)
 
-    print (r.hgetall('user:012'))
+    # for (k,v) in dic.items():
+    #     print(k,v)
+    #
+    # print (r.hgetall('user:012'))
     # print(r.get('rlis22t'))
 
 
