@@ -7,20 +7,6 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/pipeline</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="piwik@localhost" uuid="969cfea5-f370-4b7e-80e7-b8838a79227e">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/piwik</jdbc-url>
-      <driver-properties>
-        <property name="autoReconnect" value="true" />
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-      </driver-properties>
-    </data-source>
     <data-source source="LOCAL" name="postgressql@localhost" uuid="a3960b9f-ba6e-4f71-a606-63b69ceba65d">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
