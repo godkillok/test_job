@@ -30,9 +30,29 @@ class ml_100k():
         userid=[int(v[0]) for v in textFiles.take(10)]
         gge=textFiles.collect()
         print(textFile.first())
+        rdd = sc.parallelize([1, 1, 2, 3, 5, 8])
+        result = rdd.groupBy(lambda x: x % 2).collect()
+
+    @classmethod
+    def ml(self):
+        from pyspark.ml.linalg import Vectors
+        from pyspark.ml.stat import Correlation
+
+        data = [(Vectors.sparse(4, [(0, 1.0), (3, -2.0)]),),
+                (Vectors.dense([4.0, 5.0, 0.0, 3.0]),),
+                (Vectors.dense([6.0, 7.0, 0.0, 8.0]),),
+                (Vectors.sparse(4, [(0, 9.0), (3, 1.0)]),)]
+        df = ss.createDataFrame(data, ["features"])
+        df.show()
+
+        r1 = Correlation.corr(df, "features").head()
+        print("Pearson correlation matrix:\n" + str(r1[0]))
+
+        r2 = Correlation.corr(df, "features", "spearman").head()
+        print("Spearman correlation matrix:\n" + str(r2[0]))
 
 if __name__ == '__main__':
-    ml_100k.read()
-
+    # ml_100k.read()
+    ml_100k.ml()
 
 
