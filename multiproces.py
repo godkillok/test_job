@@ -1,7 +1,7 @@
 # coding: utf-8
 import multiprocessing
 import os, time, random
-
+import 
 
 def Lee(txt):
     print("\nRun task Lee-%s" % (os.getpid()))  # os.getpid()获取当前的进程的ID
