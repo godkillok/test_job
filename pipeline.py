@@ -7,16 +7,23 @@ pipeline = conn.cursor()
 
 #创立strem
 create_str = """
-CREATE STREAM namestream (name text, namecount bigint);
+CREATE STREAM namestream2 (name text, namecount bigint,namecount2 bigint);
 """
 # pipeline.execute(create_str)
 # conn.commit()
-
-
+# drop_str='''
+# DROP STREAM namestream2 CASCADE
+# '''
+stmt = '''
+              SELECT T1.schema, T1.name FROM
+              pipeline_streams() T1
+               '''
+ert=pipeline.execute(stmt)
+conn.commit()
 
 #建立正常的CONTINUOUS VIEW
 create_cv = """
-CREATE CONTINUOUS VIEW namecout4_view AS SELECT name,COUNT(*) FROM namestream GROUP BY name
+CREATE CONTINUOUS VIEW namecout7_view AS SELECT name,COUNT(*),sum(namecount) FROM namestream2 GROUP BY name
 """
 # pipeline.execute(create_cv)
 # conn.commit()
@@ -63,12 +70,14 @@ select from_unixtime(floor(unix_timestamp(date_time)/600)*600) as begin_time, co
 for i in range(100):
     data = {}
     print('name' + str(i), end=',')
-    data['name'] = 'name' + str(i%5)
+    data['name'] = 'name' + str(i/2)
     data['namecount'] = 1 * i
+    data['namecount2'] = 1 * i
+    data['namecount3'] = 1 * i
     rows.append(data)
-    pipeline.executemany('INSERT INTO namestream VALUES (%(name)s,%(namecount)s)', rows)
-    time.sleep(30)
-    rows = []
+pipeline.executemany('INSERT INTO namestream2 VALUES (%(name)s,%(namecount)s,%(namecount2)s)', rows)
+
+    # rows = []
 # pipeline.execute("INSERT INTO namestream VALUES('apple',52642)")
 # pipeline.execute("INSERT INTO namestream VALUES('apple3',5642)")
 # pipeline.execute("INSERT INTO namestream VALUES('apple2',5642)")
