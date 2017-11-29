@@ -1,5 +1,8 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+from tensorflow.python.ops import rnn, rnn_cell
 
 mnist = input_data.read_data_sets('/home/tom/mnist_data/', one_hot=True)
 
@@ -46,7 +49,7 @@ def train_neural_network(x):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=prediction, labels=y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 10
+    hm_epochs = 30
     with tf.Session() as sess:
         sess.run(tf.initialize_all_variables())
 
